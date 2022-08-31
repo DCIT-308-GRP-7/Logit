@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Goods">
    <children>
       <VBox layoutX="144.0" layoutY="78.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -56,14 +56,14 @@
             </HBox>
             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
                <children>
-                  <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="ID" />
-                      <TableColumn prefWidth="75.0" text="Name" />
-                        <TableColumn prefWidth="75.0" text="Selling Price" />
-                        <TableColumn prefWidth="75.0" text="Quantity" />
-                        <TableColumn prefWidth="75.0" text="Expiry Date" />
-                        <TableColumn prefWidth="75.0" text="Cost Price" />
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+                        <TableColumn fx:id="costPriceColumn" prefWidth="75.0" text="Cost Price" />
+                        <TableColumn  fx:id="sellingPriceColumn" prefWidth="75.0" text="Selling Price" />
+                        <TableColumn fx:id="grossPriceColumn" prefWidth="75.0" text="Gross Price" />
                         <TableColumn prefWidth="75.0" text="Action" />
                     </columns>
                      <columnResizePolicy>
