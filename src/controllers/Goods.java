@@ -1,6 +1,7 @@
 package controllers;
 
-import classes.Good;
+import classes.Product;
+import classes.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +20,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Goods implements Initializable {
-    @FXML private TableView<Good> tableView;
-    @FXML private TableColumn<Good, Integer> idColumn;
-    @FXML private TableColumn<Good, String> nameColumn;
-    @FXML private TableColumn<Good, Integer> quantityColumn;
-    @FXML private TableColumn<Good, Float> costPriceColumn;
-    @FXML private TableColumn<Good, Float> sellingPriceColumn;
-    @FXML private TableColumn<Good, Float> grossPriceColumn;
+    @FXML private TableView<Product> tableView;
+    @FXML private TableColumn<Product, Integer> idColumn;
+    @FXML private TableColumn<Product, String> nameColumn;
+    @FXML private TableColumn<Product, Integer> quantityColumn;
+    @FXML private TableColumn<Product, Float> costPriceColumn;
+    @FXML private TableColumn<Product, Float> sellingPriceColumn;
+    @FXML private TableColumn<Product, Float> grossPriceColumn;
 
 
 //    public void loginClicked(ActionEvent actionEvent) throws Exception {
@@ -39,12 +40,12 @@ public class Goods implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Good, Integer>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Good, String>("name"));
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<Good, Integer>("quantity"));
-        costPriceColumn.setCellValueFactory(new PropertyValueFactory<Good, Float>("cost_price"));
-        sellingPriceColumn.setCellValueFactory(new PropertyValueFactory<Good, Float>("selling_price"));
-        grossPriceColumn.setCellValueFactory(new PropertyValueFactory<Good, Float>("gross_price"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
+        costPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("cost_price"));
+        sellingPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("selling_price"));
+        grossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("gross_price"));
 
         // load data
         tableView.setItems(DBTest.getGoods());

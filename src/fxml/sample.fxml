@@ -1,40 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import com.gluonhq.charm.glisten.control.AppBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="635.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Sample">
    <children>
-      <VBox layoutX="-2.0" prefHeight="635.0" prefWidth="276.0" style="-fx-background-color: #033496;">
-         <children>
-            <Pane prefHeight="94.0" prefWidth="276.0">
-               <children>
-                  <Label layoutX="46.0" layoutY="24.0" text="Something" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="31.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="276.0" style="-fx-background-color: #033496;" text="Button" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="19.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="282.0" style="-fx-background-color: #033496;" text="Button" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="19.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="276.0" style="-fx-background-color: #033496;" text="Button" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="19.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
+      <AppBar prefHeight="62.0" prefWidth="912.0" titleText="AppBar" />
    </children>
 </AnchorPane>
