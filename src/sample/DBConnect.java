@@ -22,7 +22,7 @@ public class DBConnect {
             ResultSet resultSet = statement.executeQuery("select * from users");
 
             while(resultSet.next()){
-                System.out.println(resultSet.getString(1)+" "+resultSet.getString(2)+""+resultSet.getString(3)+" "+resultSet.getString(4)+""+resultSet.getString(5));
+                System.out.println(resultSet.getString(1)+" "+resultSet.getString(2)+" "+resultSet.getString(3)+" "+resultSet.getString(4)+" "+resultSet.getString(5));
             }
 
             connection.close();
