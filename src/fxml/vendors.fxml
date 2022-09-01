@@ -17,17 +17,17 @@
          <children>
             <HBox prefHeight="66.0" prefWidth="866.0" style="-fx-background-color: #266E73;">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Products" textFill="WHITE" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font name="Candara Bold" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Categories" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#openProductClicked" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Products" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Candara Bold" size="18.0" />
                      </font>
                   </Button>
                   <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Vendors" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Categories" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="18.0" />
                      </font>
