@@ -9,7 +9,7 @@ public class DBConnect {
 
     public static void connect(){
 
-        String url = "jdbc:mysql://localhost:3306/testdb";
+        String url = "jdbc:mysql://localhost:3306/dsainventory";
         String username = "root";
         String password = "";
 
