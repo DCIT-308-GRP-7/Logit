@@ -1,5 +1,6 @@
 package controllers;
 
+import classes.Category;
 import classes.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -21,21 +21,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
-    @FXML private TableView<Product> tableView;
-    @FXML private TableColumn<Product, Integer> idColumn;
-    @FXML private TableColumn<Product, String> nameColumn;
-    @FXML private TableColumn<Product, Integer> quantityColumn;
-    @FXML private TableColumn<Product, Float> costPriceColumn;
-    @FXML private TableColumn<Product, Float> sellingPriceColumn;
-    @FXML private TableColumn<Product, Float> grossPriceColumn;
-
-    // text fields in add cat
-    @FXML private TextField nameTextField;
-    @FXML private TextField quantityTextField;
-    @FXML private TextField costTextField;
-    @FXML private TextField categoryTextField;
-    @FXML private TextField sellingTextField;
+public class CategoryController implements Initializable {
+    @FXML private TableView<Category> tableView;
+    @FXML private TableColumn<Category, Integer> idColumn;
+    @FXML private TableColumn<Category, String> nameColumn;
+    @FXML private TableColumn<Category, String> descriptionColumn;
 
 
 //    public void addProduct(MouseEvent actionEvent){
@@ -53,19 +43,23 @@ public class ProductController implements Initializable {
 //            e.printStackTrace();
 //        }
 
+
+//        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+//
+//        Parent root = FXMLLoader.load(getClass().getResource("../fxml/vendors.fxml"));
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
 //    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
-        costPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("cost_price"));
-        sellingPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("selling_price"));
-        grossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("gross_price"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Category, Integer>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<Category, String>("description"));
 
         // load data
-        tableView.setItems(DBTest.getGoods());
+        tableView.setItems(Category.getCategories());
 
     }
 
@@ -85,10 +79,10 @@ public class ProductController implements Initializable {
         }
     }
 
-    public void openCategoryClicked(ActionEvent actionEvent) throws IOException {
+    public void openProdcutsClicked(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/categories.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/products.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -15,7 +15,7 @@ public class DBTest {
         ObservableList<Product> goods = FXCollections.observableArrayList();
 
         System.out.println("Adding");
-        goods.add(new Product(2, "Prince", 23, 4.5f, (float) 5.6, 123));
+        goods.add(new Product(2, "Prince", 23, 4.5f, (float) 5.6, 123, 1));
         System.out.println(goods.toString());
 
         System.out.println("Added");
@@ -68,7 +68,7 @@ public class DBTest {
                 System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3) +"  "+rs.getString(4) +"  "+rs.getString(6));
 
                 System.out.println("Adding");
-                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getFloat(6)));
+                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getFloat(6), rs.getInt(6)));
                 System.out.println("Added");
             }
 

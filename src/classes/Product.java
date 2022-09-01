@@ -15,14 +15,16 @@ public class Product {
     public SimpleFloatProperty cost_price;
     public SimpleFloatProperty selling_price;
     public SimpleFloatProperty gross_price;
+    public SimpleIntegerProperty category;
 
-    public Product(int id, String name, int quantity, float cost_price, float selling_price, float gross_price) {
+    public Product(int id, String name, int quantity, float cost_price, float selling_price, float gross_price, int cat) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.cost_price = new SimpleFloatProperty(cost_price);
         this.selling_price = new SimpleFloatProperty(selling_price);
         this.gross_price = new SimpleFloatProperty(gross_price);
+        this.category = new SimpleIntegerProperty(cat);
     }
 
     public String getName() {
@@ -49,49 +51,58 @@ public class Product {
         return quantity.get();
     }
 
+    public int getCategory() {
+        return category.get();
+    }
+
     // database
-    public static ObservableList<Category> getProducts() {
+    public static ObservableList<Product> getProducts() {
 
-        // list of categories
-        ObservableList<Category> categories = FXCollections.observableArrayList();
+        // list of goods from db
+        ObservableList<Product> products = FXCollections.observableArrayList();
 
-        // Get a connection to the database
         try {
+            // Get a connection to the database
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dsainventory", "root", "prince");
 
             // SQL statement
-            Statement stmt = con.createStatement();
+            Statement stmt=con.createStatement();
 
             // Execute SQL query
-            ResultSet rs = stmt.executeQuery("select * from category");
+            ResultSet rs=stmt.executeQuery("select * from product");
+
 
 
             // process the results
-            while (rs.next()) {
+            while(rs.next()) {
+                System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3) +"  "+rs.getString(4) +"  "+rs.getString(6));
+
                 System.out.println("Adding");
-                categories.add(new Category(rs.getInt(1), rs.getString(2), rs.getString(3)));
+                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getFloat(6), rs.getInt(6)));
                 System.out.println("Added");
             }
 
             // close mysql db connection
             con.close();
 
-            return categories;
+            return products;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return categories;
-
+            return products;
         }
+
+
     }
 
-    public static int addproduct(String name, String description) {
+
+    public static int addProduct(String name, int quantity, float cost_price, float selling_price, int category) {
 
         // Get a connection to the database
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dsainventory", "root", "prince");
 
-            String sql = "INSERT INTO `category` (`name`, `description`) VALUES (?, ?);";
+            String sql = "INSERT INTO `product` (`name`, `quantity`, `cost_price`, `selling_price`, `category`) VALUES (?, ?, ?, ?, ?);";
             // SQL statement
 //            Statement stmt = con.createStatement();
 
@@ -99,7 +110,10 @@ public class Product {
 //            ResultSet rs = stmt.executeQuery("INSERT INTO `category` (`name`, `description`) VALUES (?, ?);\n");
             PreparedStatement preparedStmt = conn.prepareStatement(sql);
             preparedStmt.setString (1, name);
-            preparedStmt.setString (2, description);
+            preparedStmt.setInt (2, quantity);
+            preparedStmt.setFloat (3, cost_price);
+            preparedStmt.setFloat (4, selling_price);
+            preparedStmt.setInt (5, category);
             preparedStmt.execute();
 
 
