@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="417.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Categories">
+<AnchorPane prefHeight="417.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddCategoryController">
    <children>
       <BorderPane layoutX="165.0" layoutY="122.0" prefHeight="560.0" prefWidth="814.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -26,13 +26,13 @@
          <center>
             <Pane prefHeight="358.0" prefWidth="391.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField layoutX="70.0" layoutY="66.0" prefHeight="25.0" prefWidth="251.0" promptText="Name" />
-                  <Button layoutX="89.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="213.0" style="-fx-background-color: #266E73;" text="Add" textFill="WHITE">
+                  <TextField fx:id="nameTextField" layoutX="70.0" layoutY="66.0" prefHeight="25.0" prefWidth="251.0" promptText="Name" />
+                  <Button layoutX="89.0" layoutY="239.0" mnemonicParsing="false" onAction="#addBtn_Clicked" prefHeight="30.0" prefWidth="213.0" style="-fx-background-color: #266E73;" text="Add" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <TextArea layoutX="71.0" layoutY="114.0" prefHeight="93.0" prefWidth="250.0" promptText="Description" />
+                  <TextArea fx:id="descriptionTextArea" layoutX="71.0" layoutY="114.0" prefHeight="93.0" prefWidth="250.0" promptText="Description" />
                </children>
             </Pane>
          </center>

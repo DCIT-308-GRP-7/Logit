@@ -63,10 +63,35 @@ public class CategoryController implements Initializable {
 
     }
 
-    public void addProduct(MouseEvent actionEvent) {
+//    public void addCategory(MouseEvent actionEvent) {
+//        Parent root;
+//        try {
+//            root = FXMLLoader.load(getClass().getResource("../fxml/addcategory.fxml"));
+//            Stage stage = new Stage();
+//            stage.setTitle("My New Stage Title");
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//            // Hide this current window (if this is what you want)
+////            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void openProdcutsClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/products.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void addCategory(MouseEvent mouseEvent) {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("../fxml/addproduct.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../fxml/addcategory.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(new Scene(root));
@@ -77,14 +102,5 @@ public class CategoryController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void openProdcutsClicked(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/products.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 }

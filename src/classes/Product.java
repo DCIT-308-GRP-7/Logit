@@ -56,7 +56,7 @@ public class Product {
     }
 
     // database
-    public static ObservableList<Product> getProducts() {
+    public static ObservableList<Product> getProducts(int category) {
 
         // list of goods from db
         ObservableList<Product> products = FXCollections.observableArrayList();
@@ -68,9 +68,13 @@ public class Product {
             // SQL statement
             Statement stmt=con.createStatement();
 
+            ResultSet rs;
             // Execute SQL query
-            ResultSet rs=stmt.executeQuery("select * from product");
-
+            if (category != 0) {
+                rs=stmt.executeQuery("select * from product where category = " + category + ";");
+            } else {
+                rs=stmt.executeQuery("select * from product;");
+            }
 
 
             // process the results

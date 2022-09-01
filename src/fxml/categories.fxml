@@ -24,12 +24,12 @@
                         <Font name="Candara Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false"  prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Categories" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Vendors" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Vendors" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Categories" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="18.0" />
                      </font>
@@ -60,7 +60,7 @@
                </HBox.margin>
             </Label>
             <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="35.0" onMouseClicked="#addCategory" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="file:/C:/Users/HP/Downloads/add.png" />
                </image>
