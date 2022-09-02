@@ -1,6 +1,7 @@
 package controllers;
 
 import classes.Product;
+import ds.OrderedListADT;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +18,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sample.DBTest;
+import sample.Main;
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
 
 public class ProductController implements Initializable {
     @FXML private TableView<Product> tableView;
@@ -43,11 +45,18 @@ public class ProductController implements Initializable {
 
     // combobox
     @FXML private ComboBox<String> comboBox;
+    @FXML private ComboBox<String> comboBoxType;
+
     @FXML public static ObservableList<String> categories = FXCollections.observableArrayList(
             "Beverages", "Bread / Bakery", "Canned / Jarred Goods", "Dairy", "Dry / Baking Goods", "Frozen Goods",
-            "Meat", "Beverages", "Produce", "Cleaners", "Paper Goods", "Personal Care"
+            "Meat", "Produce", "Cleaners", "Paper Goods", "Personal Care"
     );
 
+    @FXML public static ObservableList<String> types = FXCollections.observableArrayList("Stacked", "Queued", "List");
+
+
+    // Categories and Structure
+    private Map<String, String> category_ds = new HashMap<String, String>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,13 +67,12 @@ public class ProductController implements Initializable {
         sellingPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("selling_price"));
         grossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Float>("gross_price"));
 
-        // load data
-        tableView.setItems(Product.getProducts(1));
+        // load data from data structures (queues, stacks and lists) for UI
+        int response = Product.getProducts();
+        System.out.println(response);
+        tableView.setItems(Main.inventory.dsToObservableList(0));
 
         // Category list
-
-        // Categories and Structure
-        Map<String, String> category_ds = new HashMap<String, String>();
         category_ds.put("Beverages", "Stacks");
         category_ds.put("Bread / Bakery", "Stacks");
         category_ds.put("Canned / Jarred Goods", "Stacks");
@@ -78,6 +86,7 @@ public class ProductController implements Initializable {
         category_ds.put("Personal Care", "Stacks");
 
         comboBox.setItems(categories);
+        comboBoxType.setItems(types);
     }
 
     public void addProduct(MouseEvent actionEvent) {
@@ -107,13 +116,52 @@ public class ProductController implements Initializable {
 
     public void comboChanged(ActionEvent actionEvent) {
 
+        // selected category
         String selected = comboBox.getValue();
+        int cat_id = categories.indexOf(selected) + 1;
 
-        // update table
+        // clear combobox
+//        comboBoxType.valueProperty().set(null);
 
-        int cat_id = categories.indexOf(selected);
+        ObservableList<Product> products = Main.inventory.dsToObservableList(cat_id);
+        tableView.setItems(products);
+    }
 
-        // load data
-        tableView.setItems(Product.getProducts(cat_id + 1));
+    public void deleteClicked(ActionEvent actionEvent) {
+        String selected;
+        int cat_id = 0;
+        ObservableList<Product> products;
+
+        if (comboBoxType.getValue() != null){
+            selected = comboBoxType.getValue();
+            if (selected == "Stacked") cat_id = 2;
+            if (selected == "Queued") cat_id = 6;
+            if (selected == "List") cat_id = 9;
+            Main.inventory.deleteProduct(cat_id);
+
+            products = Main.inventory.dsToObservableList(selected);
+        }
+        else {
+            selected = comboBox.getValue();
+            cat_id = categories.indexOf(selected) + 1;
+            Main.inventory.deleteProduct(cat_id);
+
+            products = Main.inventory.dsToObservableList(cat_id);
+        }
+
+
+        tableView.setItems(products);
+
+    }
+
+    public void comboBoxTypeChanged(ActionEvent actionEvent) {
+        // selected category
+        String selected = comboBoxType.getValue();
+
+        // clear combobox
+        comboBox.valueProperty().set(null);
+
+        ObservableList<Product> products = Main.inventory.dsToObservableList(selected);
+        tableView.setItems(products);
     }
 }

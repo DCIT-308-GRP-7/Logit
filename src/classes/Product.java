@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.Main;
 
 import java.sql.*;
 
@@ -55,11 +56,11 @@ public class Product {
         return category.get();
     }
 
-    // database
-    public static ObservableList<Product> getProducts(int category) {
+    // get persistent data from database
+    public static int getProducts() {
 
         // list of goods from db
-        ObservableList<Product> products = FXCollections.observableArrayList();
+//        ObservableList<Product> products = FXCollections.observableArrayList();
 
         try {
             // Get a connection to the database
@@ -68,32 +69,28 @@ public class Product {
             // SQL statement
             Statement stmt=con.createStatement();
 
-            ResultSet rs;
-            // Execute SQL query
-            if (category != 0) {
-                rs=stmt.executeQuery("select * from product where category = " + category + ";");
-            } else {
-                rs=stmt.executeQuery("select * from product;");
-            }
-
+            ResultSet rs = stmt.executeQuery("select * from product;");
 
             // process the results
             while(rs.next()) {
                 System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3) +"  "+rs.getString(4) +"  "+rs.getString(6));
 
-                System.out.println("Adding");
-                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getFloat(6), rs.getInt(6)));
-                System.out.println("Added");
+                // create a product object
+                int cat_id = rs.getInt(7);
+                Product prod = new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getFloat(6), cat_id);
+
+                // add to data structure
+                Main.inventory.addProduct(prod);
             }
 
             // close mysql db connection
             con.close();
 
-            return products;
+            return 1;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return products;
+            return 0;
         }
 
 
@@ -133,4 +130,31 @@ public class Product {
         }
     }
 
+
+    public static int deleteProduct(String name) {
+
+        // Get a connection to the database
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dsainventory", "root", "prince");
+
+            String sql = "DELETE FROM `product` WHERE (`name` = ?);";
+            // SQL statement
+//            Statement stmt = con.createStatement();
+
+            // Execute SQL query
+//            ResultSet rs = stmt.executeQuery("INSERT INTO `category` (`name`, `description`) VALUES (?, ?);\n");
+            PreparedStatement preparedStmt = conn.prepareStatement(sql);
+            preparedStmt.setString (1, name);
+
+            // close mysql db connection
+            conn.close();
+
+            return 1;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+
+        }
+    }
 }

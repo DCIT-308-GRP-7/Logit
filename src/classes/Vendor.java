@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.Main;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -30,10 +31,7 @@ public class Vendor {
     }
 
     // database
-    public static HashMap<String, String> getVendors() {
-
-        // list of goods from db
-        HashMap<String, String> vendors = new HashMap<String, String>();
+    public static int getVendors() {
 
         try {
             // Get a connection to the database
@@ -47,19 +45,19 @@ public class Vendor {
             // process the results
             while(rs.next()) {
                 int cat_ind = rs.getInt(3);
-                System.out.println("=====================================================================");
+
                 String category = categories.get(cat_ind);
-                vendors.put(rs.getString(2), category);
+                Main.inventory.vendors.put(rs.getString(2), category);
             }
 
             // close mysql db connection
             con.close();
 
-            return vendors;
+            return 1;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return vendors;
+            return 0;
         }
 
 

@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sample.DBTest;
+import sample.Main;
 
 
 import java.io.IOException;
@@ -30,6 +30,11 @@ public class VendorController implements Initializable {
     @FXML private TableColumn<Vendor, String> nameColumn;
     @FXML private TableColumn<Vendor, String> categoryColumn;
 
+    // hashmap data structure for vendor information
+    int reponse = Vendor.getVendors();
+    HashMap<String, String> vendors = Main.inventory.vendors;
+
+    // List of vendors
     ObservableList<Vendor> vendor_list = FXCollections.observableArrayList();
 
 
@@ -38,8 +43,7 @@ public class VendorController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Vendor, String>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<Vendor, String>("category"));
 
-        // load data
-        HashMap<String, String> vendors = Vendor.getVendors();
+        // load data from vendor hashmaps to an arraylist
         for (int i = 0; i < vendors.size(); i++){
             String name = vendors.keySet().toArray()[i].toString();
             String category = vendors.get(name);

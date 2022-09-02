@@ -23,5 +23,6 @@ public class AddCategoryController {
         System.out.println("==========================================================================");
         int add_response = Category.addCategory(name, description);
         System.out.println(add_response);
+
     }
 }

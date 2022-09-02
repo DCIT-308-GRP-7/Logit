@@ -3,6 +3,7 @@ package controllers;
 import classes.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 public class AddProductController {
@@ -25,5 +26,8 @@ public class AddProductController {
 
         int add_response = Product.addProduct(name, quantity, cost, selling, category);
         System.out.println(add_response);
+
+        // close window
+        ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
 }
