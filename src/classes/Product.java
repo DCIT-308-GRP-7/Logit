@@ -3,11 +3,10 @@ package classes;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import sample.Main;
+import main.Main;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Product {
     public SimpleIntegerProperty id;
@@ -96,6 +95,44 @@ public class Product {
 
     }
 
+    public static ArrayList<Product> getIssuedProducts() {
+
+        // list of goods from db
+        ArrayList<Product> products = new ArrayList<Product>();
+
+        try {
+            // Get a connection to the database
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dsainventory", "root", "prince");
+
+            // SQL statement
+            Statement stmt=con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("select * from product where issued = 1;");
+
+            // process the results
+            while(rs.next()) {
+                System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3) +"  "+rs.getString(4) +"  "+rs.getString(6));
+
+                // create a product object
+                int cat_id = rs.getInt(7);
+                Product prod = new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getFloat(5), rs.getFloat(6), cat_id);
+
+                // add to data structure
+                products.add(prod);
+            }
+
+            // close mysql db connection
+            con.close();
+
+            return products;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return products;
+        }
+
+
+    }
 
     public static int addProduct(String name, int quantity, float cost_price, float selling_price, int category) {
 

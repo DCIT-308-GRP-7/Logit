@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import classes.Product;
 import classes.Sale;
@@ -23,14 +23,14 @@ public class Management {
 
         // category of product
         int cat_id = product.category.getValue();
-
-
         if (cat_id >= 1 & cat_id <= 4) {
             System.out.println("=====================Pushing to stack============================");
             products_stack.push(product);
         } else if (cat_id >= 5 & cat_id <= 7) {
+            System.out.println("=====================Enqueuing Product============================");
             products_queue.add(product);
         } else if (cat_id >= 8 & cat_id <= 11) {
+            System.out.println("=====================Adding to List============================");
             products_list.add(product);
         }
     }
@@ -41,10 +41,12 @@ public class Management {
 
         if (cat_id >= 1 & cat_id <= 4) {
             products_stack.pop();
-            System.out.println("Popping");
+            System.out.println("===============================Popping Product ==================================");
         } else if (cat_id >= 5 & cat_id <= 7) {
+            System.out.println("===============================De-queuing Product ==================================");
             products_queue.remove();
         } else if (cat_id >= 8 & cat_id <= 11) {
+            System.out.println("===============================Removing Product ==================================");
             products_list.remove(0);
         }
     }
@@ -60,6 +62,7 @@ public class Management {
 
     }
 
+
     // add a product sale
     public void addVendor(Vendor vendor){
         String vendor_name = vendor.getName();
@@ -68,6 +71,7 @@ public class Management {
         // add vendor information to HashMap data structure
         vendors.put(vendor_name, vendor_category);
     }
+
 
     // method for javafx collections
     public ObservableList<Product> dsToObservableList(Integer category){
@@ -115,6 +119,7 @@ public class Management {
 
         return products;
     }
+
 
     // method for javafx collections
     public ObservableList<Product> dsToObservableList(String type){

@@ -1,4 +1,4 @@
-package ds;
+package ds.interfaces;
 
 public interface StackADT<T> {
 

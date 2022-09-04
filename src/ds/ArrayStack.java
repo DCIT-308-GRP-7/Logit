@@ -1,6 +1,7 @@
 package ds;
 
 import ds.exceptions.EmptyCollectionException;
+import ds.interfaces.StackADT;
 
 import java.util.Arrays;
 

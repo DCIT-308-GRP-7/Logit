@@ -1,13 +1,9 @@
 package classes;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import sample.Main;
+import main.Main;
 
 import java.sql.*;
-import java.util.HashMap;
 
 import static controllers.ProductController.categories;
 

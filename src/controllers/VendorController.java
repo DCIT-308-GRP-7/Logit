@@ -1,6 +1,5 @@
 package controllers;
 
-import classes.Product;
 import classes.Vendor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,14 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sample.Main;
+import main.Main;
 
 
 import java.io.IOException;
@@ -31,7 +27,7 @@ public class VendorController implements Initializable {
     @FXML private TableColumn<Vendor, String> categoryColumn;
 
     // hashmap data structure for vendor information
-    int reponse = Vendor.getVendors();
+    int response = Vendor.getVendors();
     HashMap<String, String> vendors = Main.inventory.vendors;
 
     // List of vendors
@@ -68,6 +64,15 @@ public class VendorController implements Initializable {
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/products.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void salesBtnClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/sales.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
