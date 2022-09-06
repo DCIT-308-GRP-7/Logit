@@ -74,4 +74,13 @@ public class SaleController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void issuedClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/issuedproducts.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

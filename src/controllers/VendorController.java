@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.Main;
 
@@ -76,5 +77,37 @@ public class VendorController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void issuedClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/issuedproducts.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void addClicked(MouseEvent mouseEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/addvendor.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("My New Stage Title");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+        HashMap<String, String> vendors = Main.inventory.vendors;
+
+        vendor_list.clear();
+
+        // load data from vendor hashmaps to an arraylist
+        for (int i = 0; i < vendors.size(); i++){
+            String name = vendors.keySet().toArray()[i].toString();
+            String category = vendors.get(name);
+
+            vendor_list.add(new Vendor(name, category));
+        }
+
+        tableView.setItems(vendor_list);
     }
 }

@@ -41,7 +41,7 @@
                             </font>
                         </Button>
                         <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Bills" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#orderClicked" prefHeight="71.0" prefWidth="208.0" style="-fx-background-color: #266E73;" text="Order" textFill="WHITE">
                             <font>
                                 <Font name="Candara Bold" size="18.0" />
                             </font>

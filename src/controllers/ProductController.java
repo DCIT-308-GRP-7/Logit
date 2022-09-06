@@ -44,7 +44,6 @@ public class ProductController implements Initializable {
 
     // combobox
     @FXML private ComboBox<String> comboBox;
-    @FXML private ComboBox<String> comboBoxType;
 
     @FXML public static ObservableList<String> categories = FXCollections.observableArrayList(
             "Beverages", "Bread / Bakery", "Canned / Jarred Goods", "Dairy", "Dry / Baking Goods", "Frozen Goods",
@@ -69,7 +68,7 @@ public class ProductController implements Initializable {
         // load data from data structures (queues, stacks and lists) for UI
 //        int response = Product.getProducts();
 //        System.out.println(response);
-        tableView.setItems(Main.inventory.dsToObservableList(0));
+        tableView.setItems(Main.inventory.dsToObservableList());
 
         // Category list
         category_ds.put("Beverages", "Stacks");
@@ -85,7 +84,6 @@ public class ProductController implements Initializable {
         category_ds.put("Personal Care", "Stacks");
 
         comboBox.setItems(categories);
-        comboBoxType.setItems(types);
     }
 
     public void addProduct(MouseEvent actionEvent) {
@@ -98,13 +96,11 @@ public class ProductController implements Initializable {
             stage.showAndWait();
 
             // refresh table
-            String selected = comboBoxType.getValue();
-            if (comboBoxType.getValue() != null){
-                selected = comboBoxType.getValue();
-                tableView.setItems(Main.inventory.dsToObservableList(selected));
-            } else {
-                tableView.setItems(Main.inventory.dsToObservableList(0));
-            }
+            String selected = comboBox.getValue();
+
+                int cat = categories.indexOf(selected) + 1;
+                tableView.setItems(Main.inventory.dsToObservableList(cat));
+
             // Hide this current window (if this is what you want)
 //            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
         }
@@ -140,37 +136,19 @@ public class ProductController implements Initializable {
         int cat_id = 0;
         ObservableList<Product> products;
 
-        if (comboBoxType.getValue() != null){
-            selected = comboBoxType.getValue();
-            if (selected == "Stacked") cat_id = 2;
-            if (selected == "Queued") cat_id = 6;
-            if (selected == "List") cat_id = 9;
+        selected = comboBox.getValue();
+        cat_id = categories.indexOf(selected) + 1;
+        if (cat_id >=8 && cat_id <=11 ){
+            Product p_ = tableView.getSelectionModel().getSelectedItem();
+            Main.inventory.deleteProduct(cat_id, p_);
+        } else {
             Main.inventory.deleteProduct(cat_id);
-
-            products = Main.inventory.dsToObservableList(selected);
-        }
-        else {
-            selected = comboBox.getValue();
-            cat_id = categories.indexOf(selected) + 1;
-            Main.inventory.deleteProduct(cat_id);
-
-            products = Main.inventory.dsToObservableList(cat_id);
         }
 
+        products = Main.inventory.dsToObservableList(cat_id);
 
         tableView.setItems(products);
 
-    }
-
-    public void comboBoxTypeChanged(ActionEvent actionEvent) {
-        // selected category
-        String selected = comboBoxType.getValue();
-
-        // clear combobox
-        comboBox.valueProperty().set(null);
-
-        ObservableList<Product> products = Main.inventory.dsToObservableList(selected);
-        tableView.setItems(products);
     }
 
 
@@ -187,6 +165,15 @@ public class ProductController implements Initializable {
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/issuedproducts.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void billClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/order.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

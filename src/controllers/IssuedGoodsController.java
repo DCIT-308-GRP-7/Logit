@@ -67,30 +67,6 @@ public class IssuedGoodsController implements Initializable {
         tableView.setItems(issued_prod);
     }
 
-    public void addProduct(MouseEvent actionEvent) {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("../fxml/addproduct.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-
-            // refresh table
-            String selected = comboBoxType.getValue();
-            if (comboBoxType.getValue() != null){
-                selected = comboBoxType.getValue();
-                tableView.setItems(Main.inventory.dsToObservableList(selected));
-            } else {
-                tableView.setItems(Main.inventory.dsToObservableList(0));
-            }
-            // Hide this current window (if this is what you want)
-//            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void openVendorsClicked(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -102,16 +78,6 @@ public class IssuedGoodsController implements Initializable {
     }
 
 
-    public void comboBoxTypeChanged(ActionEvent actionEvent) {
-        // selected category
-        String selected = comboBoxType.getValue();
-
-        // clear combobox
-        comboBox.valueProperty().set(null);
-
-        ObservableList<Product> products = Main.inventory.dsToObservableList(selected);
-        tableView.setItems(products);
-    }
 
     public void salesBtnClicked(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -126,6 +92,15 @@ public class IssuedGoodsController implements Initializable {
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/products.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void orderClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/order.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

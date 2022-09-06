@@ -14,6 +14,27 @@ public class MainDS {
 
         stack.push(prod);
 
-        System.out.println(stack);
+
+        DQueues<String> que = new DQueues<String>(56);
+        que.enqueue("Prince");
+        que.enqueue("Gyan");
+        que.enqueue("Dimafo");
+        que.enqueue("Looka");
+
+        DStacks<String> st = new DStacks<String>(56);
+        st.push("Name1");
+        st.push("Name2");
+        st.push("Name3");
+        st.push("Name5nf");
+
+        st.show();
+        System.out.println();
+        st.pop();
+        st.show();
+        System.out.println();
+        st.pop();
+        st.show();
+        System.out.println();
+        st.pop();
     }
 }
